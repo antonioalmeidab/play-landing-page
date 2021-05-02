@@ -2,16 +2,22 @@
 
 @(productsList: Seq[Product], monthlyRevenues: String, contactInfo: models.ContactInfo)(implicit request: Request)
 @main("Play Investimentos") {
-<div class="content">
+<div>
   <section class="banner">
     <div class="p-5 mb-4 banner-content">
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Play Investimentos</h1>
-        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+        <h1 class="display-5 fw-bold">Faça com quem conhece</h1>
+        <p class="col-md-8 fs-4">
+          Nossa missão é proporcionar rendimentos consistentes no longo prazo,
+          além de educar e informar investidores sobre o mundo dos investimentos.
+        </p>
+        <p class="col-md-8 fs-4">
+          Conte com nosso time de gestores experientes em diversos segmentos de mercado.
+        </p>
       </div>
     </div>
   </section>
-  <div class="container">
+  <div class="container-fluid no-padding">
     <section class="py-5 centered">
       <div class="row g-5 py-5">
         @for(product <- productsList) {
@@ -28,23 +34,34 @@
         }
       </div>
     </section>
-    <section class="revenue">
+    <section class="revenue centered">
+      <h2>Nosso valor</h2>
       <div class="row">
         <div class="col">
-          <canvas id="myChart"></canvas>
+          <canvas id="chart"></canvas>
         </div>
-        <div class="col">
-          <h3>Valor Gerenciado</h3>
-          <p>Valor total gerenciado pela nossa equipe nos nossos fundos de investimento nos últimos 6 meses</p>
+        <div class="col revenue-text">
+          <div>
+            <h3>Patrimônio gerido</h3>
+            <p>
+              O gráfico ao lado  representa o crescimento dos investidores na nossa equipe.
+              Nele temos o patrimônio líquido, em milhões de reais, investido nos nossos 3 fundos
+              e controlado por nossos gestores nos últimos 6 meses.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   </div>
   <section class="contact">
-    <h2>Contato</h2>
-    <p>Telefone: @contactInfo.telephone</p>
-    <p>E-mail: @contactInfo.email</p>
-    <p>Endereço: @contactInfo.address</p>
+    <p>Todos os direitos reservados</p>
+    <div class="contact-info">
+      <p>@contactInfo.address</p>
+      <p>|</p>
+      <p>@contactInfo.telephone</p>
+      <p>|</p>
+      <p>@contactInfo.email</p>
+    </div>
 
   </section>
 </div>
@@ -78,7 +95,7 @@
     options: {}
   };
   let myChart = new Chart(
-          document.getElementById('myChart'),
+          document.getElementById('chart'),
           config
   );
 </script>

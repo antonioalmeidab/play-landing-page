@@ -12,6 +12,7 @@ import java.util.List;
 public class DataController {
     public List<Product> productsList;
     public List<Revenue> monthlyRevenue;
+    public ContactInfo contactInfo;
 
     public List<Product> getProductsList() {
         return productsList;
@@ -35,25 +36,25 @@ public class DataController {
     public ContactInfo getContactInfo() {
         return contactInfo;
     }
-
-    public ContactInfo contactInfo;
-
     public DataController() {
         this.productsList = new ArrayList<>();
         this.productsList.add(new Product(
                 "Safe",
                 "Renda fixa",
-                "Product 1 description"));
+                "Fundo de ativos de renda fixa. Focado em investidores que desejam baixos riscos."));
         this.productsList.add(new Product(
                 "Multiple",
                 "Ações",
-                "Product 2 description"));
+                "Fundo de ações de ativos nacionais. Para quem deseja se expor ao mercado financeiro."));
         this.productsList.add(new Product(
                 "World",
                 "Internacional",
-                "Product 3 description"));
+                "Fundo de ações de ativos internacionais. Opção para quem deseja expandir os horizontes."));
 
-        this.contactInfo = new ContactInfo("(81) 99581-6186", "contato@play.com.br", "Rua Tal");
+        this.contactInfo = new ContactInfo(
+                "(81) 99876-1234",
+                "contato@play.com.br",
+                "Rua XPTO, 123");
 
         this.monthlyRevenue = new ArrayList<>();
         this.monthlyRevenue.add(new Revenue(
