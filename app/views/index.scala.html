@@ -1,11 +1,85 @@
-@()
+@import play.mvc.Http.Request
 
-@main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+@(productsList: Seq[Product], monthlyRevenues: String, contactInfo: models.ContactInfo)(implicit request: Request)
+@main("Play Investimentos") {
 <div class="content">
-  <section class="company-container">
+  <section class="banner">
+    <div class="p-5 mb-4 banner-content">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Play Investimentos</h1>
+        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <section class="py-5 centered">
+      <div class="row g-5 py-5">
+        @for(product <- productsList) {
+          <div class="product col-md-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">@product.title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@product.subtitle</h6>
+                <p class="card-text">@product.description</p>
+                <a href="#" class="card-link">Saiba mais</a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+    <section class="revenue">
+      <div class="row">
+        <div class="col">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="col">
+          <h3>Valor Gerenciado</h3>
+          <p>Valor total gerenciado pela nossa equipe nos nossos fundos de investimento nos últimos 6 meses</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="contact">
+    <h2>Contato</h2>
+    <p>Telefone: @contactInfo.telephone</p>
+    <p>E-mail: @contactInfo.email</p>
+    <p>Endereço: @contactInfo.address</p>
 
   </section>
-  <section class="services-container"></section>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  let monthlyString = "@monthlyRevenues";
+  monthlyString = monthlyString.replaceAll('&quot;', '\"');
+  const monthsList = JSON.parse(monthlyString);
+
+  const revenues = [];
+  const months = [];
+
+  monthsList.forEach((item) => {
+    revenues.push(item.revenue);
+    months.push(item.yearMonth);
+  });
+
+  const labels = months;
+  const data = {
+    labels: months,
+    datasets: [{
+      label: 'R$',
+      backgroundColor: 'rgb(64,64,64)',
+      borderColor: 'rgb(64, 64, 64)',
+      data: revenues,
+    }]
+  };
+  const config = {
+    type: 'line',
+    data,
+    options: {}
+  };
+  let myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+  );
+</script>
 }
